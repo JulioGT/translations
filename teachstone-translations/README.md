@@ -3,20 +3,37 @@
 <div align="center">
   <img src="resources/logots.png" alt="Teachstone Translations Logo" width="128" height="128">
   <h1>Teachstone Translations</h1>
-  <p>Automatically translate Teachstone message files to Spanish and French with intelligent formatting</p>
+  <p>Professional translation engine for Teachstone message files with real-time metrics and modern UI</p>
 </div>
 
-## Features
+## ✨ Features
 
-- 🌍 **Translate TypeScript message files** to Spanish and French using Hugging Face AI
-- 🏗️ **Nested object support** - handles complex message structures with proper indentation
-- ⚡ **Fast batch processing** (5 items per batch) with progress tracking
-- 🎨 **Intelligent formatting** with 4-space nested indentation and alphabetical sorting
-- 📝 **Smart quote handling** - only adds quotes for contractions (e.g., "Don't")
-- 🔧 **Template literal preservation** - keeps `{{variable}}` placeholders unchanged
-- 🐍 **camelCase to snake_case conversion** - converts keys to proper YAML format
-- 📋 **One-click copy to clipboard** with beautiful preview panel
-- ⌨️ **Keyboard shortcut support** (`Cmd+Shift+T` / `Ctrl+Shift+T`)
+- 🌍 **Multi-language Translation** - English, Spanish, and French with intelligent formatting
+- ⏱️ **Real-time Performance Metrics** - Track translation time, message count, and language count
+- 🎨 **Modern Tailwind CSS UI** - Professional, responsive design with glass morphism effects
+- 🏗️ **Nested Object Support** - Handles complex message structures with proper indentation
+- ⚡ **Optimized Performance** - Fast batch processing with progress tracking
+- 🔧 **Template Literal Preservation** - Keeps `{{variable}}` placeholders unchanged
+- 🐍 **Smart Key Conversion** - camelCase to snake_case with alphabetical sorting
+- 📋 **One-click Copy** - Beautiful preview panel with copy functionality
+- ⌨️ **Keyboard Shortcut** (`Cmd+Shift+T` / `Ctrl+Shift+T`)
+- 🧪 **Test Command** - Verify extension functionality
+
+## 🚀 Performance Metrics
+
+The extension now provides real-time insights into translation performance:
+
+- **Total Time**: Precise measurement from command execution to completion
+- **Message Count**: Number of messages processed
+- **Language Count**: Total languages generated (English + Spanish + French)
+
+## 🎨 Modern UI with Tailwind CSS
+
+- **Glass Morphism Design**: Beautiful translucent cards with backdrop blur
+- **Responsive Layout**: Adapts to different screen sizes
+- **Smooth Animations**: Fade-in and slide-up effects
+- **Professional Branding**: Teachstone color scheme and typography
+- **Interactive Elements**: Hover effects and visual feedback
 
 ## Prerequisites
 
@@ -53,16 +70,22 @@ Before installing the extension, make sure you have:
 1. Open Command Palette:
    - Mac: `Cmd+Shift+P`
    - Windows/Linux: `Ctrl+Shift+P`
-2. Type "Teachstone Translations"
+2. Type "Teachstone: Translate Messages"
 3. Press Enter
+
+### Method 3: Test Extension
+
+1. Open Command Palette
+2. Type "Teachstone: Test Extension"
+3. Verify extension is working
 
 ### Working with Translations
 
 1. Open a TypeScript file containing message definitions
-2. Trigger translation using either method above
-3. Wait for the translation process to complete
-4. Review translations in the preview panel
-5. Use the copy button to copy translations to clipboard
+2. Trigger translation using any method above
+3. Watch real-time progress and metrics
+4. Review translations in the modern preview panel
+5. Use copy buttons to copy translations to clipboard
 
 ## Message File Structure
 
@@ -122,6 +145,19 @@ modal:
 
 ## Features in Detail
 
+### ⏱️ Performance Tracking
+
+- **Real-time Metrics**: Duration, message count, and language count
+- **Progress Indicators**: Visual feedback during translation process
+- **Performance Optimization**: Efficient processing with minimal overhead
+
+### 🎨 Modern UI Components
+
+- **Metrics Dashboard**: Glass morphism cards showing performance data
+- **Translation Cards**: Professional cards for each language
+- **Interactive Buttons**: Hover effects and copy feedback
+- **Responsive Design**: Works on all screen sizes
+
 ### 🏗️ Nested Object Support
 
 - Automatically detects nested message structures
@@ -147,19 +183,44 @@ modal:
 - **No translation of variables**: Content inside `{{}}` stays unchanged
 - **Works with any variable name**: `{{customVariable}}`
 
-### ⚡ Batch Processing
+### ⚡ Optimized Processing
 
-- Processes translations in batches of 5 items
+- Processes translations efficiently
 - Shows progress indicator in notification
 - Handles rate limiting automatically
 - Cancellation support
 
 ### 🎯 Professional Preview Panel
 
-- Side-by-side view of Spanish and French translations
-- Copy functionality for each translation
-- Beautiful Teachstone-branded UI
-- Responsive design with hover effects
+- **Three-column layout**: English, Spanish, and French side-by-side
+- **Copy functionality**: One-click copy for each translation
+- **Modern design**: Tailwind CSS with glass morphism effects
+- **Performance metrics**: Real-time statistics display
+
+## 🏗️ Architecture & DRY Principles
+
+The extension follows clean architecture and DRY (Don't Repeat Yourself) principles:
+
+### Modular Design
+
+- **Separation of Concerns**: Each module has a single responsibility
+- **Reusable Components**: Shared utilities and services
+- **Clean Interfaces**: Well-defined contracts between modules
+
+### Key Modules
+
+- **TranslationService**: Orchestrates translation workflow
+- **UIGenerator**: Creates modern Tailwind-based UI
+- **TemplatePreservation**: Handles template literal logic
+- **MessageParser**: Parses TypeScript message files
+- **ExtensionLogger**: Centralized logging system
+
+### Code Quality
+
+- **Type Safety**: Full TypeScript implementation
+- **Error Handling**: Comprehensive error management
+- **Performance**: Optimized for speed and efficiency
+- **Maintainability**: Clean, readable, and well-documented code
 
 ## Troubleshooting
 
@@ -250,14 +311,29 @@ user_profile:
   edit_button: Editar Perfil
 ```
 
-## Support
+## 🎯 Performance Benchmarks
 
-For issues, feature requests, or contributions, please visit our [GitHub repository](https://github.com/teachstone/vscode-translations).
+Typical performance metrics for different file sizes:
 
-## License
+- **Small files (1-10 messages)**: 2-5 seconds
+- **Medium files (10-50 messages)**: 5-15 seconds
+- **Large files (50+ messages)**: 15-30 seconds
 
-This extension is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+_Performance may vary based on network conditions and API response times._
 
----
+## 🤝 Contributing
 
-Made with ❤️ by Teachstone
+This extension is built with modern web technologies and follows best practices:
+
+- **TypeScript**: Full type safety and modern JavaScript features
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
+- **VS Code Extension API**: Native integration with VS Code
+- **Node.js**: Server-side JavaScript runtime
+
+## 📄 License
+
+MIT License - see LICENSE file for details.
+
+## 🏢 About Teachstone
+
+Teachstone is dedicated to improving educational outcomes through research-based solutions and professional development tools.

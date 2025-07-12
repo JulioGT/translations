@@ -1,40 +1,20 @@
-import { HuggingFaceResponse, TranslationError } from "./types";
-// Add node-fetch for Node.js environment
-declare const fetch: any;
+import { TranslationError, Logger } from "./types";
+import fetch from "node-fetch";
 
 export class HuggingFaceAPI {
   private apiKey: string;
   private baseUrl = "https://api-inference.huggingface.co/models";
+  private logger: Logger;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, logger: Logger) {
     this.apiKey = apiKey;
-  }
-
-  async translateBatch(
-    texts: string[],
-    targetLanguage: string
-  ): Promise<string[]> {
-    const results: string[] = [];
-
-    for (const text of texts) {
-      try {
-        const translation = await this.translateSingle(text, targetLanguage);
-        results.push(translation);
-      } catch (error) {
-        console.error(`Failed to translate "${text}":`, error);
-        // Return original text if translation fails
-        results.push(text);
-      }
-    }
-
-    return results;
+    this.logger = logger;
   }
 
   public async translateSingle(
     text: string,
     targetLanguage: string
   ): Promise<string> {
-    // Use the most popular and reliable Helsinki-NLP OPUS models
     const modelMap: Record<string, string> = {
       es: "Helsinki-NLP/opus-mt-en-es",
       fr: "Helsinki-NLP/opus-mt-en-fr",
@@ -61,10 +41,6 @@ export class HuggingFaceAPI {
       },
     };
 
-    console.log(
-      `🔄 Translating to ${targetLanguage}: "${text}" with model ${model}`
-    );
-
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -77,9 +53,7 @@ export class HuggingFaceAPI {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error(`❌ API Error ${response.status}:`, errorText);
 
-        // Check if model is loading
         if (response.status === 503) {
           throw new TranslationError(
             `Model is loading, please try again in a few minutes. Status: ${response.status}`
@@ -90,9 +64,7 @@ export class HuggingFaceAPI {
       }
 
       const result = await response.json();
-      console.log(`📝 Raw API response:`, result);
 
-      // Handle different response formats
       let translatedText = "";
 
       if (Array.isArray(result) && result.length > 0) {
@@ -112,19 +84,16 @@ export class HuggingFaceAPI {
       }
 
       if (!translatedText) {
-        console.error(`❌ No translation found in response:`, result);
         throw new TranslationError(
           `Invalid response format: ${JSON.stringify(result)}`
         );
       }
 
-      console.log(`✅ Translated "${text}" -> "${translatedText}"`);
       return translatedText.trim();
     } catch (error) {
       if (error instanceof TranslationError) {
         throw error;
       }
-      console.error(`❌ Translation request failed:`, error);
       throw new TranslationError(
         `Translation request failed: ${error}`,
         error as Error

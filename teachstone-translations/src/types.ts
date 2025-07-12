@@ -12,8 +12,10 @@ export interface ParsedFile {
   messages: NestedMessageObject;
 }
 
-export interface HuggingFaceResponse {
-  translation_text: string;
+export interface Logger {
+  info(message: string): void;
+  warn(message: string): void;
+  error(message: string, error?: Error): void;
 }
 
 export class TranslationError extends Error {

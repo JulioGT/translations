@@ -1,7 +1,18 @@
 import * as ts from "typescript";
-import { MessageObject, NestedMessageObject, ParsedFile } from "./types";
+import {
+  MessageObject,
+  NestedMessageObject,
+  ParsedFile,
+  Logger,
+} from "./types";
 
 export class MessageParser {
+  private static logger: Logger;
+
+  static setLogger(logger: Logger) {
+    MessageParser.logger = logger;
+  }
+
   static parseMessagesFile(content: string): ParsedFile {
     const sourceFile = ts.createSourceFile(
       "messages.ts",
@@ -32,7 +43,6 @@ export class MessageParser {
       }
 
       if (ts.isExportAssignment(node) || ts.isExportDeclaration(node)) {
-        // Handle export statements
         if (
           ts.isExportAssignment(node) &&
           ts.isObjectLiteralExpression(node.expression)
@@ -60,42 +70,33 @@ export class MessageParser {
         const key = this.getPropertyName(property.name);
         if (key) {
           if (ts.isStringLiteral(property.initializer)) {
-            // Direct string value - create a MessageObject
             result[key] = {
               key,
               defaultValue: property.initializer.text,
             };
           } else if (ts.isObjectLiteralExpression(property.initializer)) {
-            // Check if this object literal is a MessageObject or NestedMessageObject
             const hasKeyAndDefaultValue = this.isMessageObject(
               property.initializer
             );
 
             if (hasKeyAndDefaultValue) {
-              // This is a MessageObject - extract key and defaultValue
               const messageObj = this.extractMessageObject(
                 property.initializer
               );
               if (messageObj) {
                 result[key] = messageObj;
-                console.log(
-                  `✅ Parsed MessageObject: ${key} -> "${messageObj.defaultValue}"`
-                );
               }
             } else {
-              // This is a nested object - recurse
-              console.log(`🔄 Parsing nested object: ${key}`);
               result[key] = this.parseObjectLiteral(property.initializer);
             }
           } else if (
             ts.isTemplateExpression(property.initializer) ||
             ts.isNoSubstitutionTemplateLiteral(property.initializer)
           ) {
-            // Template literal - preserve the original text
             const templateText = property.initializer.getFullText();
             result[key] = {
               key,
-              defaultValue: templateText.trim().replace(/^`|`$/g, ""), // Remove backticks
+              defaultValue: templateText.trim().replace(/^`|`$/g, ""),
             };
           }
         }
@@ -137,7 +138,6 @@ export class MessageParser {
             ts.isTemplateExpression(prop.initializer) ||
             ts.isNoSubstitutionTemplateLiteral(prop.initializer)
           ) {
-            // Handle template literals like `${PATH}.key_name`
             key = prop.initializer.getFullText().trim().replace(/^`|`$/g, "");
           }
         }
@@ -162,9 +162,11 @@ export class MessageParser {
       return { key, defaultValue };
     }
 
-    console.warn(
-      `⚠️ Could not extract MessageObject - key: "${key}", defaultValue: "${defaultValue}"`
-    );
+    if (this.logger) {
+      this.logger.warn(
+        `Could not extract MessageObject - key: "${key}", defaultValue: "${defaultValue}"`
+      );
+    }
     return null;
   }
 
@@ -177,21 +179,5 @@ export class MessageParser {
       return name.text;
     }
     return null;
-  }
-
-  static extractDefaultValues(messages: NestedMessageObject): string[] {
-    const values: string[] = [];
-
-    for (const value of Object.values(messages)) {
-      if ("key" in value && "defaultValue" in value) {
-        // This is a MessageObject
-        values.push((value as MessageObject).defaultValue);
-      } else {
-        // This is a nested object - recurse
-        values.push(...this.extractDefaultValues(value as NestedMessageObject));
-      }
-    }
-
-    return values;
   }
 }

@@ -72,20 +72,4 @@ export class TranslationFormatter {
     formatNestedObject(sortedMessages, 0);
     return lines.join("\n");
   }
-
-  static formatOutput(translations: Record<string, string>): string {
-    const lines: string[] = [];
-
-    // Sort the keys alphabetically and convert to snake_case
-    const sortedKeys = Object.keys(translations).sort((a, b) =>
-      a.localeCompare(b)
-    );
-
-    for (const key of sortedKeys) {
-      const snakeCaseKey = this.toSnakeCase(key);
-      lines.push(`${snakeCaseKey}: ${translations[key]}`);
-    }
-
-    return lines.join("\n");
-  }
 }
