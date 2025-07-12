@@ -3,14 +3,14 @@
 <div align="center">
   <img src="resources/logots.png" alt="Teachstone Translations Logo" width="128" height="128">
   <h1>Teachstone Translations</h1>
-  <p>Professional translation engine for Teachstone message files with real-time metrics and modern UI</p>
+  <p>Professional translation engine for Teachstone message files with real-time metrics and a custom branded UI</p>
 </div>
 
 ## ✨ Features
 
 - 🌍 **Multi-language Translation** - English, Spanish, and French with intelligent formatting
 - ⏱️ **Real-time Performance Metrics** - Track translation time, message count, and language count
-- 🎨 **Modern Tailwind CSS UI** - Professional, responsive design with glass morphism effects
+- 🎨 **Professional Custom UI** - Accessible, responsive design with Teachstone branding and custom CSS
 - 🏗️ **Nested Object Support** - Handles complex message structures with proper indentation
 - ⚡ **Optimized Performance** - Fast batch processing with progress tracking
 - 🔧 **Template Literal Preservation** - Keeps `{{variable}}` placeholders unchanged
@@ -27,13 +27,12 @@ The extension now provides real-time insights into translation performance:
 - **Message Count**: Number of messages processed
 - **Language Count**: Total languages generated (English + Spanish + French)
 
-## 🎨 Modern UI with Tailwind CSS
+## 🎨 Modern UI with Custom CSS
 
-- **Glass Morphism Design**: Beautiful translucent cards with backdrop blur
+- **Professional Design**: Clean, accessible, and branded for Teachstone
 - **Responsive Layout**: Adapts to different screen sizes
-- **Smooth Animations**: Fade-in and slide-up effects
-- **Professional Branding**: Teachstone color scheme and typography
 - **Interactive Elements**: Hover effects and visual feedback
+- **Custom Color Scheme**: Teachstone colors and typography
 
 ## Prerequisites
 
@@ -153,7 +152,7 @@ modal:
 
 ### 🎨 Modern UI Components
 
-- **Metrics Dashboard**: Glass morphism cards showing performance data
+- **Metrics Dashboard**: Custom cards showing performance data
 - **Translation Cards**: Professional cards for each language
 - **Interactive Buttons**: Hover effects and copy feedback
 - **Responsive Design**: Works on all screen sizes
@@ -194,7 +193,7 @@ modal:
 
 - **Three-column layout**: English, Spanish, and French side-by-side
 - **Copy functionality**: One-click copy for each translation
-- **Modern design**: Tailwind CSS with glass morphism effects
+- **Modern design**: Custom CSS, accessible, and Teachstone branded
 - **Performance metrics**: Real-time statistics display
 
 ## 🏗️ Architecture & DRY Principles
@@ -210,7 +209,7 @@ The extension follows clean architecture and DRY (Don't Repeat Yourself) princip
 ### Key Modules
 
 - **TranslationService**: Orchestrates translation workflow
-- **UIGenerator**: Creates modern Tailwind-based UI
+- **UIGenerator**: Creates modern custom CSS-based UI
 - **TemplatePreservation**: Handles template literal logic
 - **MessageParser**: Parses TypeScript message files
 - **ExtensionLogger**: Centralized logging system
