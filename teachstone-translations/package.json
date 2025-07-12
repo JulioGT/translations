@@ -1,0 +1,85 @@
+{
+  "name": "teachstone-translations",
+  "displayName": "Teachstone Translations",
+  "description": "Translate Teachstone message files to Spanish and French",
+  "version": "0.1.0",
+  "publisher": "teachstone",
+  "icon": "resources/logots.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teachstone/vscode-translations"
+  },
+  "author": {
+    "name": "Teachstone",
+    "url": "https://teachstone.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:teachstone-translations.translate",
+    "onCommand:teachstone-translations.test"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "teachstone-translations.test",
+        "title": "Teachstone: Test Extension"
+      },
+      {
+        "command": "teachstone-translations.translate",
+        "title": "Teachstone: Translate Messages"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "teachstone-translations.translate",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Teachstone Translations",
+      "properties": {
+        "teachstoneTranslations.huggingFaceApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for Hugging Face translation service"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^16.18.126",
+    "@types/typescript": "^2.0.0",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vscode/test-electron": "^2.3.2",
+    "@vscode/vsce": "^2.15.0",
+    "eslint": "^8.41.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.6.12",
+    "node-fetch": "^2.7.0",
+    "typescript": "^5.8.3"
+  }
+}
